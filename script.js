@@ -4,7 +4,10 @@ const searchBar = document.getElementById('search-bar');
 const taskContainer = document.querySelector('.span-grid');
 
 // Load tasks from localStorage on load
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', function() {
+    loadTasks();
+    updateEmptyState();
+});
 
 // Add task button functionality
 addBtn.addEventListener('click', function () {
@@ -21,6 +24,7 @@ function addTask(taskText) {
     taskCard.classList.add('span-card');
     taskCard.textContent = taskText;
 
+
     // Optional: delete on double-click
     taskCard.addEventListener('dblclick', function () {
         if (confirm('Delete this task?')) {
@@ -30,6 +34,8 @@ function addTask(taskText) {
     });
 
     taskContainer.appendChild(taskCard);
+    updateEmptyState();
+
 }
 
 // Save task to localStorage
@@ -50,6 +56,7 @@ function deleteTask(taskText) {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks = tasks.filter(task => task !== taskText);
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    updateEmptyState();
 }
 
 // Search functionality
@@ -66,3 +73,13 @@ searchBar.addEventListener('input', function () {
         }
     });
 });
+const emptyState = document.getElementById('empty-state');
+
+// Helper: Update empty state visibility
+function updateEmptyState() {
+    if (taskContainer.children.length === 0) {
+        emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
+    }
+}
