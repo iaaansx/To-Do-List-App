@@ -4,23 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1 id="title">To-Do List App</h1>
-      <form id="task">
-        <input
-          type="text"
-          id="task-input"
-          placeholder="Add a new Task..."
-          required
-        />
-        <button type="submit">Add</button>
-      </form>
-      <ul id="task-list">
-        <li></li>
-      </ul>
+    <nav class="side-nav" id="side-nav">
+      <header>
+        <div class="img-logo">
+          <span class="image">
+            <img src="todo.jpg" alt="logo" />
+          </span>
+        </div>
+      </header>
+      <a href="#home"><i class="fa-solid fa-house-chimney"></i></a>
+      <a href="#calendar"><i class="fa-solid fa-calendar-days"></i></a>
+      <a href="#inbox"><i class="fa-solid fa-message"></i></a>
+      <a href="#setting" class="setting-link"
+        ><i class="fa-solid fa-gear"></i
+      ></a>
+    </nav>
+    <div class="side-pan">
+      <div class="span-header">
+        <h2>To-Do</h2>
+        <button class="add-btn" id="add-btn-task">
+          <i class="fa-solid fa-circle-plus"></i>
+        </button>
+      </div>
+      <div class="span-grid"></div>
+      <div class="span-card">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint
+          nesciunt aperiam a iusto natus dolores rem laudantium vel illo? Dolor
+          unde nesciunt illo autem quisquam perferendis impedit id omnis sequi!
+        </p>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
