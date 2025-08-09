@@ -43,14 +43,19 @@
     font-size: 14.5px;
     margin: 15px 0;
 }
+form{
+    width: 100%;
+}
 .login-form{
     position: absolute;
     right: 0;
     width: 50%;
     height: 100%;
+    background: #fff;
     display: flex;
     align-items: center;
     color: #333;
+    text-align: center;
     padding: 40px;
     z-index: 1;
     transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
@@ -58,17 +63,17 @@
 .login-container.active .login-form{
     right: 50%;
 }
-.register-form{
+.login-form.register{
     visibility: hidden;
 }
-.login-container.active .register-form{
+.login-container.active .login-form.register{
     visibility: visible;
 }
-.input-user{
+.input-box{
     position: relative;
     margin: 30px 0;
 }
-.input-user input{
+/*.input-box input{
     width: 100%;
     padding: 13px 50px 13px 20px;
     background: #eee;
@@ -79,11 +84,11 @@
     color: #333;
     font-weight: 500;
 }
-.input-user input::placeholder{
+.input-box input::placeholder{
     color: #888;
     font-weight: 400;
 }
-.input-user i{
+.input-box i{
     position: absolute;
     right: 20px;
     top: 50%;
