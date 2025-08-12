@@ -194,14 +194,14 @@ form{
 .toggle-panel p{
     margin-bottom: 20px;
 }
-.toggle-panel .btn-register{
+.toggle-panel .reg{
     width: 160px;
     height: 46px;
     background: transparent;
     border: 2px solid #fff;
     box-shadow: none;
 }
-.toggle-panel .btn-login{
+.toggle-panel .log{
     width: 160px;
     height: 46px;
     background: transparent;
