@@ -187,6 +187,27 @@ form{
     right: 0;
     transition-delay: 1.2s;
 }
+.login-container.active .toggle-panel.right-panel{
+    right: 0;
+    transition-delay: 1.2s;
+}
+.toggle-panel p{
+    margin-bottom: 20px;
+}
+.toggle-panel .btn-register{
+    width: 160px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+.toggle-panel .btn-login{
+    width: 160px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
 .side-nav{
     position: fixed;
     top: 0;
