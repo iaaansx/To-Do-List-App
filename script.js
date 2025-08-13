@@ -62,19 +62,21 @@ document.querySelector(".btn-login").addEventListener("click", function (e) {
     }
 });
 
+//Logout
+    const logoutBtn = document.querySelector(".btn-logout");
+
+    if(logoutBtn){
+    logoutBtn.addEventListener("click", function(e){
+        e.preventDefault();
+    localStorage.removeItem("loggedIn");
+    alert("You have been logged out.");
+    window.location.href = "login.html";
+    })    
+};
+
 //Keep Logged In
 window.onload = function () {
     if (localStorage.getItem("loggedIn") === "true") {
         window.location.href = "index.html";
     }
 };
-
-document.querySelector(".logout-btn").addEventListener("click", function(e){
-    e.preventDefault();
-
-    localStorage.removeItem("loggedIn");
-
-    alert("You have been logged out.")
-
-    window.location.href = "login.html";
-})

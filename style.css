@@ -263,7 +263,7 @@ form{
     width: 100%;
     text-align: center;
 }
-.side-nav .logout-btn{
+.side-nav .btn-logout{
     position: absolute;
     bottom: 20px;
     left: 0;
@@ -271,7 +271,7 @@ form{
     text-align: center;
     background-color: #ff0000;
 }
-.side-nav .logout-btn:hover{
+.side-nav .btn-logout:hover{
     background: #ff0000;
 }
 .side-pan{
