@@ -258,10 +258,21 @@ form{
 }
 .side-nav .setting-link{
     position: absolute;
+    bottom: 75px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+.side-nav .logout-btn{
+    position: absolute;
     bottom: 20px;
     left: 0;
     width: 100%;
     text-align: center;
+    background-color: #ff0000;
+}
+.side-nav .logout-btn:hover{
+    background: #ff0000;
 }
 .side-pan{
     position: fixed;
