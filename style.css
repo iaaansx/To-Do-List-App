@@ -208,6 +208,20 @@ form{
     border: 2px solid #fff;
     box-shadow: none;
 }
+.btn-register{
+    cursor: pointer;
+}
+.btn-register:hover{
+    background-color: #005fcc;
+    transform: scale(1.05);
+}
+.btn-login{
+    cursor: pointer;
+}
+.btn-login:hover{
+    background-color: #005fcc;
+    transform: scale(1.05);
+}
 .side-nav{
     position: fixed;
     top: 0;
