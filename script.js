@@ -1,3 +1,31 @@
+//Modal Message
+function showModal(message, redirectUrl) {
+    if (!message || message.trim() === "") return;
+
+    const modal = document.getElementById("customModal");
+    const modalMessage = document.getElementById("modal-message");
+    const closeBtn = document.querySelector(".modal-close");
+
+    modalMessage.textContent = message;
+    modal.style.display = "block";
+
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+        if (redirectUrl) window.location.href = redirectUrl;
+    };
+
+    window.onclick = (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            if (redirectUrl) window.location.href = redirectUrl;
+        }
+    };
+
+    setTimeout(() => {
+        modal.style.display = "none";
+        if (redirectUrl) window.location.href = redirectUrl;
+    }, 2000);
+}
 //Login Page
 const loginContainer = document.querySelector('.login-container')
 const registerBtn = document.querySelector('.reg')
@@ -20,7 +48,7 @@ document.querySelector(".btn-register").addEventListener("click", function (e) {
     let password = document.getElementById("regpass").value.trim();
 
     if (!username || !email || !password) {
-        alert("Please fill in all registration fields.");
+        showModal("Please fill in all registration fields.");
         return;
     }
 
@@ -33,7 +61,7 @@ document.querySelector(".btn-register").addEventListener("click", function (e) {
     //Save to LocalStorage
     localStorage.setItem("user", JSON.stringify(user));
 
-    alert("Registration successful! You can now log in.");
+    showModal("Registration successful! You can now log in.");
     document.getElementById("reguser").value = "";
     document.getElementById("regemail").value = "";
     document.getElementById("regpass").value = "";
@@ -49,28 +77,23 @@ document.querySelector(".btn-login").addEventListener("click", function (e) {
     let storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (!storedUser) {
-        alert("No account found. Please register first.");
+        showModal("No account found. Please register first.");
         return;
     }
 
     if (username === storedUser.username && password === storedUser.password) {
         localStorage.setItem("loggedIn", "true");
-        alert("Login successful!");
         window.location.href = "index.html";
     } else {
-        alert("Invalid username or password.");
+        showModal("Invalid username or password.");
     }
 });
-
 //Logout
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutBtn = document.querySelector(".btn-logout");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            localStorage.removeItem("loggedIn");
-            alert("You have been logged out.");
-            window.location.href = "login.html";
-        });
-    }
-});
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        localStorage.removeItem("loggedIn");
+        window.location.href = "login.html";
+    });
+};
+//To-Do
