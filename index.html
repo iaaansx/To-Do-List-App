@@ -11,37 +11,59 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="side-nav" id="side-nav">
-      <header>
-        <div class="img-logo">
-          <span class="image">
-            <img src="todo.jpg" alt="logo" />
-          </span>
+    <!-- Flex Container -->
+    <div class="layout">
+      <!-- Side Nav -->
+      <nav class="side-nav" id="side-nav">
+        <header>
+          <div class="img-logo">
+            <span class="image">
+              <img src="todo.jpg" alt="logo" />
+            </span>
+          </div>
+        </header>
+        <a href="#home"><i class="fa-solid fa-house-chimney"></i></a>
+        <a href="#calendar"><i class="fa-solid fa-calendar-days"></i></a>
+        <a href="#inbox"><i class="fa-solid fa-message"></i></a>
+        <div class="divider"></div>
+        <a href="#setting" class="setting-link">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+        <a href="login.html" class="btn-logout">
+          <i class="fa-solid fa-power-off"></i>
+        </a>
+      </nav>
+
+      <!-- Side Panel -->
+      <div class="side-pan">
+        <div class="span-header">
+          <h2>My Tasks</h2>
+          <button class="add-btn" id="add-btn-task">
+            <i class="fas fa-plus"></i>
+          </button>
         </div>
-      </header>
-      <a href="#home"><i class="fa-solid fa-house-chimney"></i></a>
-      <a href="#calendar"><i class="fa-solid fa-calendar-days"></i></a>
-      <a href="#inbox"><i class="fa-solid fa-message"></i></a>
-      <div class="divider"></div>
-      <a href="#setting" class="setting-link"
-        ><i class="fa-solid fa-gear"></i
-      ></a>
-      <a href="login.html" class="btn-logout">
-        <i class="fa-solid fa-power-off"></i>
-      </a>
-    </nav>
-    <div class="side-pan">
-      <div class="span-header">
-        <h2>To-Do</h2>
-        <button class="add-btn" id="add-btn-task">
-          <i class="fa-solid fa-circle-plus"></i>
-        </button>
+        <div class="search-container">
+          <input type="text" id="search-bar" placeholder="Search tasks..." />
+          <p id="empty-state" class="empty-state">📭 No tasks yet</p>
+        </div>
+        <div class="span-grid" id="taskGrid"></div>
       </div>
-      <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Search tasks..." />
-        <p id="empty-state" class="empty-state">📭 No tasks yet</p>
+
+      <!-- Modal Content -->
+      <div class="modal" id="taskModal">
+        <div class="modal-content">
+          <span class="modal-close" id="closeModal">&times;</span>
+          <h3>Add New Task</h3>
+          <input type="text" id="taskTitle" placeholder="Enter title" />
+          <textarea id="taskDesc" placeholder="Enter description"></textarea>
+          <button id="saveTask">Add Task</button>
+        </div>
       </div>
-      <div class="span-grid"></div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="calendar-panel"></div>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
