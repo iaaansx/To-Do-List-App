@@ -7,25 +7,27 @@ function showModal(message, redirectUrl) {
     const closeBtn = document.querySelector(".modal-close");
 
     modalMessage.textContent = message;
-    modal.style.display = "block";
+    modal.classList.add("show");  
 
     closeBtn.onclick = () => {
-        modal.style.display = "none";
+        modal.classList.remove("show");
         if (redirectUrl) window.location.href = redirectUrl;
     };
 
     window.onclick = (e) => {
         if (e.target === modal) {
-            modal.style.display = "none";
+            modal.classList.remove("show");
             if (redirectUrl) window.location.href = redirectUrl;
         }
     };
 
     setTimeout(() => {
-        modal.style.display = "none";
+        modal.classList.remove("show");
         if (redirectUrl) window.location.href = redirectUrl;
     }, 2000);
 }
+
+
 //Login Page
 const loginContainer = document.querySelector('.login-container')
 const registerBtn = document.querySelector('.reg')
@@ -39,7 +41,7 @@ loginBtn.addEventListener('click',()=>{
     loginContainer.classList.remove('active')
 })
 
-//Register
+//Register Page
 document.querySelector(".btn-register").addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -89,6 +91,7 @@ document.querySelector(".btn-login").addEventListener("click", function (e) {
     }
 });
 //Logout
+const logoutBtn = document.querySelector(".btn-logout"); 
 if (logoutBtn) {
     logoutBtn.addEventListener("click", function (e) {
         e.preventDefault();
@@ -114,22 +117,34 @@ function backToTasks(){
 //Modal Task / Card Grid
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.getElementById("add-btn-task");
-  const modal = document.getElementById("taskModal");
-  const closeModal = document.getElementById("closeModal");
-  const saveTask = document.getElementById("saveTask");
-  const taskGrid = document.getElementById("taskGrid");
+  const taskModal = document.getElementById("taskModal"); 
+  const closeModal = document.getElementById("closeModal"); 
+  const saveTask = document.getElementById("saveTask"); 
+  const taskGrid = document.getElementById("taskGrid"); 
+  const taskTitle = document.getElementById("taskTitle"); 
+  const taskDesc = document.getElementById("taskDesc"); 
+  const emptyState = document.getElementById("empty-state"); 
 
   addBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
+    taskModal.classList.add("show");
+    taskTitle.value = "";
+    taskDesc.value = "";
   });
 
   closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
+    taskModal.classList.remove("show");
   });
 
+  window.addEventListener("click", (e) => {
+    if (e.target === taskModal) {
+      taskModal.classList.remove("show");
+    }
+  });
+
+  // Save task
   saveTask.addEventListener("click", () => {
-    const title = document.getElementById("taskTitle").value.trim();
-    const desc = document.getElementById("taskDesc").value.trim();
+    const title = taskTitle.value.trim();
+    const desc = taskDesc.value.trim();
 
     if (title === "" || desc === "") {
       alert("Please fill out both fields.");
@@ -145,14 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     taskGrid.appendChild(card);
 
-    document.getElementById("taskTitle").value = "";
-    document.getElementById("taskDesc").value = "";
-    modal.style.display = "none";
-  });
+    emptyState.style.display = "none";
 
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
+    taskModal.classList.remove("show");
   });
 });
