@@ -1,167 +1,140 @@
-//Modal Message
+// ===== Modal Message =====
 function showModal(message, redirectUrl) {
-    if (!message || message.trim() === "") return;
+  if (!message || message.trim() === "") return;
 
-    const modal = document.getElementById("customModal");
-    const modalMessage = document.getElementById("modal-message");
-    const closeBtn = document.querySelector(".modal-close");
+  const modal = document.getElementById("customModal");
+  const modalMessage = document.getElementById("modal-message");
+  const closeBtn = document.querySelector(".modal-close");
 
-    modalMessage.textContent = message;
-    modal.classList.add("show");  
+  if (!modal || !modalMessage || !closeBtn) return; // prevents index.html crash
 
-    closeBtn.onclick = () => {
-        modal.classList.remove("show");
-        if (redirectUrl) window.location.href = redirectUrl;
-    };
+  modalMessage.textContent = message;
+  modal.classList.add("show");
 
-    window.onclick = (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("show");
-            if (redirectUrl) window.location.href = redirectUrl;
-        }
-    };
+  closeBtn.onclick = () => {
+    modal.classList.remove("show");
+    if (redirectUrl) window.location.href = redirectUrl;
+  };
 
-    setTimeout(() => {
-        modal.classList.remove("show");
-        if (redirectUrl) window.location.href = redirectUrl;
-    }, 2000);
+  window.onclick = (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("show");
+      if (redirectUrl) window.location.href = redirectUrl;
+    }
+  };
+
+  setTimeout(() => {
+    modal.classList.remove("show");
+    if (redirectUrl) window.location.href = redirectUrl;
+  }, 2000);
 }
 
+// ===== LOGIN PAGE ONLY =====
+if (document.querySelector(".login-container")) {
+  const loginContainer = document.querySelector(".login-container");
+  const registerBtn = document.querySelector(".reg");
+  const loginBtn = document.querySelector(".log");
 
-//Login Page
-const loginContainer = document.querySelector('.login-container')
-const registerBtn = document.querySelector('.reg')
-const loginBtn = document.querySelector('.log')
+  registerBtn.addEventListener("click", () => {
+    loginContainer.classList.add("active");
+  });
 
-registerBtn.addEventListener('click',()=>{
-   loginContainer.classList.add('active') 
-})
+  loginBtn.addEventListener("click", () => {
+    loginContainer.classList.remove("active");
+  });
 
-loginBtn.addEventListener('click',()=>{
-    loginContainer.classList.remove('active')
-})
-
-//Register Page
-document.querySelector(".btn-register").addEventListener("click", function (e) {
+  // Register
+  document.querySelector(".btn-register").addEventListener("click", function (e) {
     e.preventDefault();
-
     let username = document.getElementById("reguser").value.trim();
     let email = document.getElementById("regemail").value.trim();
     let password = document.getElementById("regpass").value.trim();
 
     if (!username || !email || !password) {
-        showModal("Please fill in all registration fields.");
-        return;
+      showModal("Please fill in all registration fields.");
+      return;
     }
 
-    let user = {
-        username: username,
-        email: email,
-        password: password 
-    };
-
-    //Save to LocalStorage
+    let user = { username, email, password };
     localStorage.setItem("user", JSON.stringify(user));
 
     showModal("Registration successful! You can now log in.");
     document.getElementById("reguser").value = "";
     document.getElementById("regemail").value = "";
     document.getElementById("regpass").value = "";
-});
+  });
 
-//Login
-document.querySelector(".btn-login").addEventListener("click", function (e) {
+  // Login
+  document.querySelector(".btn-login").addEventListener("click", function (e) {
     e.preventDefault();
-
     let username = document.getElementById("loguser").value.trim();
     let password = document.getElementById("logpass").value.trim();
 
     let storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (!storedUser) {
-        showModal("No account found. Please register first.");
-        return;
-    }
-
-    if (username === storedUser.username && password === storedUser.password) {
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "index.html";
-    } else {
-        showModal("Invalid username or password.");
-    }
-});
-//Logout
-const logoutBtn = document.querySelector(".btn-logout"); 
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        localStorage.removeItem("loggedIn");
-        window.location.href = "login.html";
-    });
-};
-//To-Do
-function openTask(title,description){
-    const main = document.querySelector(".main-content")
-    main.innerHTML = `
-    <div class = "task-details">
-    <h2>${title}</h2>
-    <p>#{description}</p>
-    <button onclick="backToTasks()">⬅ Back</button>
-    </div>`
-}
-function backToTasks(){
-    const main = document.querySelector(".main-content")
-    main.innerHTML = `<div class="calendar-panel"></div>`
-}
-
-//Modal Task / Card Grid
-document.addEventListener("DOMContentLoaded", () => {
-  const addBtn = document.getElementById("add-btn-task");
-  const taskModal = document.getElementById("taskModal"); 
-  const closeModal = document.getElementById("closeModal"); 
-  const saveTask = document.getElementById("saveTask"); 
-  const taskGrid = document.getElementById("taskGrid"); 
-  const taskTitle = document.getElementById("taskTitle"); 
-  const taskDesc = document.getElementById("taskDesc"); 
-  const emptyState = document.getElementById("empty-state"); 
-
-  addBtn.addEventListener("click", () => {
-    taskModal.classList.add("show");
-    taskTitle.value = "";
-    taskDesc.value = "";
-  });
-
-  closeModal.addEventListener("click", () => {
-    taskModal.classList.remove("show");
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === taskModal) {
-      taskModal.classList.remove("show");
-    }
-  });
-
-  // Save task
-  saveTask.addEventListener("click", () => {
-    const title = taskTitle.value.trim();
-    const desc = taskDesc.value.trim();
-
-    if (title === "" || desc === "") {
-      alert("Please fill out both fields.");
+      showModal("No account found. Please register first.");
       return;
     }
 
-    const card = document.createElement("div");
-    card.classList.add("span-card");
-    card.innerHTML = `
-      <h4>${title}</h4>
-      <p>${desc}</p>
+    if (username === storedUser.username && password === storedUser.password) {
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "index.html";
+    } else {
+      showModal("Invalid username or password.");
+    }
+  });
+}
+
+// ===== INDEX PAGE ONLY =====
+if (document.getElementById("add-btn-task")) {
+  const logoutBtn = document.querySelector(".btn-logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    });
+  }
+
+  function backToTasks() {
+    document.querySelector(".main-content").innerHTML = `<div class="calendar-panel"></div>`;
+  }
+
+  const addBtn = document.getElementById("add-btn-task");
+  const mainContent = document.querySelector(".main-content");
+  const taskGrid = document.getElementById("taskGrid");
+  const emptyState = document.getElementById("empty-state");
+
+  addBtn.addEventListener("click", () => {
+    mainContent.innerHTML = `
+      <div class="task-form">
+        <h3>Add New Task</h3>
+        <input type="text" id="taskTitle" placeholder="Enter title" />
+        <textarea id="taskDesc" placeholder="Enter description"></textarea>
+        <button id="saveTask">Save Task</button>
+        <button id="cancelTask">Cancel</button>
+      </div>
     `;
 
-    taskGrid.appendChild(card);
+    document.getElementById("saveTask").addEventListener("click", () => {
+      const title = document.getElementById("taskTitle").value.trim();
+      const desc = document.getElementById("taskDesc").value.trim();
 
-    emptyState.style.display = "none";
+      if (!title || !desc) {
+        alert("Please fill out both fields.");
+        return;
+      }
 
-    taskModal.classList.remove("show");
+      const card = document.createElement("div");
+      card.classList.add("span-card");
+      card.innerHTML = `<h4>${title}</h4><p>${desc}</p>`;
+
+      taskGrid.appendChild(card);
+      emptyState.classList.add("hidden");
+      backToTasks();
+    });
+
+    document.getElementById("cancelTask").addEventListener("click", backToTasks);
   });
-});
+}
