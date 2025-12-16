@@ -297,3 +297,5 @@ if (inboxBtn) {
 document.addEventListener("DOMContentLoaded", () => {
   if (homeBtn) homeBtn.click();
 });
+
+// ===== SETTINGS PAGE ONLY =====
